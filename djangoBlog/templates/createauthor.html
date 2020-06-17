@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% block title %}
+Create author profile
+{% endblock %}
+{% block stylesheet %}
+
+{% endblock %}
+{% block profile %}
+{% endblock %}
+{% block content %}
+<div class="container-fluid my-4">
+    <form class="col-lg-6 offset-lg-3" method="POST" enctype="multipart/form-data">
+        <h3>Become Author</h3><br>
+        {% csrf_token %}
+    
+        {% for field in form.visible_fields %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {% render_field field class="form-control" %}
+            {% if field.help_text %}
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+            {% endif %}
+        </div>
+        {% endfor %}
+    
+        <button class="btn btn-primary">Create Author</button>
+    </form>
+</div>
+{% endblock %}
+{% block script %}
+
+{% endblock %}

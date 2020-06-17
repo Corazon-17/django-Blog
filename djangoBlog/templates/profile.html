@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block title %}
+    Author || {{ auth.name }}
+{% endblock %}
+{% block stylesheet %}
+
+{% endblock %}
+{% block profile %}
+    
+{% endblock %}
+{% block content %}
+    <div class="col-md-8">
+
+        <h3 class="my-4">Author : {{ auth.name }}</h3><br>
+    
+        {% for obj in post %}
+            <!-- Blog Post -->
+            <div class="card mb-4">
+            <img class="img-fluid" src="{{ obj.image.url }}" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title">{{ obj.title }}</h4>
+                <p class="card-text"><strong>Kategori : {{ obj.category }}</strong></p>
+                <p class="card-text">{{ obj.body | truncatewords:15 }}</p>
+                <a href="{{ obj.get_single_url }}" class="btn btn-primary">Read More &rarr;</a>
+            </div>
+            <div class="card-footer text-muted">
+                Diupload pada {{ obj.posted_on }} oleh
+                <a href="{{ obj.get_author_url }}">{{ obj.article_author.name }}</a>
+                <p>Tag :
+                  {% for tag in tags %}
+                    {% if tag in obj.tag.all %}
+                      ({{ tag.name }})
+                    {% endif %}
+                  {% endfor %}
+                </p>
+            </div>
+            </div>
+        {% endfor %}
+
+{% endblock %}
+{% block script %}
+
+{% endblock %}
